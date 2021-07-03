@@ -1,0 +1,10 @@
+{
+	"commands.afktimer.client.start": "[AFKTimer] Client Timer set to %s tick(s).",
+	"commands.afktimer.client.stop": "[AFKTimer] Client Timer has been stopped.",
+	"commands.afktimer.client.query": "[AFKTimer] %s tick(s) till the Client Timer ends.",
+	"commands.afktimer.client.extend": "[AFKTimer] Client Timer extended by %s tick(s).",
+	"commands.afktimer.server.start": "[AFKTimer] Server Timer set to %s tick(s).",
+	"commands.afktimer.server.stop": "[AFKTimer] Server Timer has been stopped.",
+	"commands.afktimer.server.query": "[AFKTimer] %s tick(s) till the Server Timer ends.",
+	"commands.afktimer.server.extend": "[AFKTimer] Server Timer extended by %s tick(s)."
+}
