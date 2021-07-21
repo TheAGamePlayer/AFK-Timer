@@ -1,2 +1,5 @@
+Version 1.0.1R:
+- Updated mods.toml
+
 Version 1.0.0R:
 - First Official Release
