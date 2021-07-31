@@ -3,14 +3,14 @@ package dev.theagameplayer.afktimer.network.packet;
 import java.util.function.Supplier;
 
 import dev.theagameplayer.afktimer.AFKEventManager.ClientEvents;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.network.NetworkEvent.Context;
+import net.minecraftforge.fmllegacy.network.NetworkEvent.Context;
 
 public final class CTimerExtendPacket {
 	private final int time;
@@ -19,11 +19,11 @@ public final class CTimerExtendPacket {
 		this.time = timeIn;
 	}
 	
-	public static void encode(CTimerExtendPacket msgIn, PacketBuffer bufIn) {
+	public static void encode(CTimerExtendPacket msgIn, FriendlyByteBuf bufIn) {
 		bufIn.writeInt(msgIn.time);
 	}
 	
-	public static CTimerExtendPacket decode(PacketBuffer bufIn) {
+	public static CTimerExtendPacket decode(FriendlyByteBuf bufIn) {
 		return new CTimerExtendPacket(bufIn.readInt());
 	}
 	
@@ -38,7 +38,7 @@ public final class CTimerExtendPacket {
 		private static void handlePacket(CTimerExtendPacket msgIn, Supplier<Context> ctxIn) {
 			ClientEvents.clientTime += msgIn.time;
 			Minecraft mc = Minecraft.getInstance();
-			mc.player.sendMessage(new TranslationTextComponent("commands.afktimer.client.extend", msgIn.time).withStyle(Style.EMPTY.withColor(TextFormatting.GRAY)), mc.player.getUUID());
+			mc.player.sendMessage(new TranslatableComponent("commands.afktimer.client.extend", msgIn.time).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)), mc.player.getUUID());
 		}
 	}
 }

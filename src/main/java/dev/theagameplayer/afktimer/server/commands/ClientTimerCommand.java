@@ -1,4 +1,4 @@
-package dev.theagameplayer.afktimer.command;
+package dev.theagameplayer.afktimer.server.commands;
 
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
@@ -9,12 +9,12 @@ import dev.theagameplayer.afktimer.network.packet.CTimerExtendPacket;
 import dev.theagameplayer.afktimer.network.packet.CTimerQueryPacket;
 import dev.theagameplayer.afktimer.network.packet.CTimerStartPacket;
 import dev.theagameplayer.afktimer.network.packet.CTimerStopPacket;
-import net.minecraft.command.CommandSource;
-import net.minecraft.command.Commands;
-import net.minecraft.command.arguments.TimeArgument;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.TimeArgument;
 
 public final class ClientTimerCommand {
-	public static ArgumentBuilder<CommandSource, ?> register() {
+	public static ArgumentBuilder<CommandSourceStack, ?> register() {
 		return Commands.literal("client")
 				.requires(player -> {
 					return player.hasPermission(0);

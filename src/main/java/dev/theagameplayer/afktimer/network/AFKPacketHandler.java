@@ -5,11 +5,11 @@ import dev.theagameplayer.afktimer.network.packet.CTimerExtendPacket;
 import dev.theagameplayer.afktimer.network.packet.CTimerQueryPacket;
 import dev.theagameplayer.afktimer.network.packet.CTimerStartPacket;
 import dev.theagameplayer.afktimer.network.packet.CTimerStopPacket;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.PacketDistributor;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.fmllegacy.network.NetworkRegistry;
+import net.minecraftforge.fmllegacy.network.PacketDistributor;
+import net.minecraftforge.fmllegacy.network.simple.SimpleChannel;
 
 public final class AFKPacketHandler {
 	private static final String PROTOCAL_VERSION = "1";
@@ -28,7 +28,7 @@ public final class AFKPacketHandler {
 		CHANNEL.messageBuilder(CTimerExtendPacket.class, id++).encoder(CTimerExtendPacket::encode).decoder(CTimerExtendPacket::decode).consumer(CTimerExtendPacket.Handler::handle).add();
 	}
 	
-	public static void sendToClient(Object msgIn, ServerPlayerEntity playerIn) {
+	public static void sendToClient(Object msgIn, ServerPlayer playerIn) {
 		CHANNEL.send(PacketDistributor.PLAYER.with(() -> playerIn), msgIn);
 	}
 }

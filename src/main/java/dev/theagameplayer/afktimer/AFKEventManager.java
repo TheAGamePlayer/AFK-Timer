@@ -3,19 +3,19 @@ package dev.theagameplayer.afktimer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dev.theagameplayer.afktimer.command.AFKCommands;
+import dev.theagameplayer.afktimer.server.commands.AFKCommands;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.DirtMessageScreen;
-import net.minecraft.client.gui.screen.MainMenuScreen;
-import net.minecraft.client.gui.screen.MultiplayerScreen;
+import net.minecraft.client.gui.screens.GenericDirtMessageScreen;
+import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
+import net.minecraftforge.fmlserverevents.FMLServerStartedEvent;
 
 public final class AFKEventManager {
 	private static final Logger LOGGER = LogManager.getLogger(AFKTimerMod.MODID);
@@ -55,17 +55,18 @@ public final class AFKEventManager {
 			boolean local = mcIn.isLocalServer();
 			mcIn.level.disconnect();
 			if (local) {
-				mcIn.clearLevel(new DirtMessageScreen(new TranslationTextComponent("menu.savingLevel")));
+				mcIn.clearLevel(new GenericDirtMessageScreen(new TranslatableComponent("menu.savingLevel")));
 			} else {
 				mcIn.clearLevel();
 			}
 			if (clientQuitGame) {
 				mcIn.stop();
 			} else {
+				TitleScreen titleScreen = new TitleScreen();
 				if (local) {
-					mcIn.setScreen(new MainMenuScreen());
+					mcIn.setScreen(titleScreen);
 				} else {
-					mcIn.setScreen(new MultiplayerScreen(new MainMenuScreen()));
+					mcIn.setScreen(new JoinMultiplayerScreen(titleScreen));
 				}
 			}
 		}
