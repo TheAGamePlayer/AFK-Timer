@@ -1,12 +1,10 @@
-#Minecraft 1.18.x
-Version 1.0.3R:
-- Updated to 1.18.2
-
 #Minecraft 1.17.x
+
 Version 1.0.2R:
 - Updated to 1.17.1
 
 #Minecraft 1.16.x
+
 Version 1.0.1R:
 - Updated mods.toml
 
