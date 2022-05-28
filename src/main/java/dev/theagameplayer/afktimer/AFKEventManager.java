@@ -14,8 +14,8 @@ import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fmlserverevents.FMLServerStartedEvent;
 
 public final class AFKEventManager {
 	private static final Logger LOGGER = LogManager.getLogger(AFKTimerMod.MODID);
@@ -93,10 +93,10 @@ public final class AFKEventManager {
 		public ServerEvents() {
 			super();
 			this.forgeBus.addListener(ServerEvents::serverTick);
-			this.forgeBus.addListener(ServerEvents::serverStarting);
+			this.forgeBus.addListener(ServerEvents::serverStarted);
 		}
 		
-		public static void serverStarting(FMLServerStartedEvent eventIn) {
+		public static void serverStarted(ServerStartedEvent eventIn) {
 			server = eventIn.getServer();
 		}
 		
