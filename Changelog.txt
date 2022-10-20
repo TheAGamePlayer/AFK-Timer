@@ -1,3 +1,7 @@
+#Minecraft 1.19.x
+Version 1.0.4R:
+- Updated to 1.19.2
+
 #Minecraft 1.18.x
 Version 1.0.3R:
 - Updated to 1.18.2

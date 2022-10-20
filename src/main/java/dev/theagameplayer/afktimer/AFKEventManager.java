@@ -8,7 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.GenericDirtMessageScreen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -32,7 +32,7 @@ public final class AFKEventManager {
 			this.forgeBus.addListener(ClientEvents::clientTick);
 		}
 		
-		public static void loggedOut(ClientPlayerNetworkEvent.LoggedOutEvent eventIn) {
+		public static void loggedOut(ClientPlayerNetworkEvent.LoggingOut eventIn) {
 			clientActive = false;
 			clientTime = 0;
 			clientTick = 0;
@@ -55,7 +55,7 @@ public final class AFKEventManager {
 			boolean local = mcIn.isLocalServer();
 			mcIn.level.disconnect();
 			if (local) {
-				mcIn.clearLevel(new GenericDirtMessageScreen(new TranslatableComponent("menu.savingLevel")));
+				mcIn.clearLevel(new GenericDirtMessageScreen(Component.translatable("menu.savingLevel")));
 			} else {
 				mcIn.clearLevel();
 			}
@@ -80,7 +80,7 @@ public final class AFKEventManager {
 		}
 		
 		public static void registerCommands(RegisterCommandsEvent eventIn) {
-			AFKCommands.build(eventIn.getDispatcher(), eventIn.getEnvironment());
+			AFKCommands.build(eventIn.getDispatcher(), eventIn.getCommandSelection());
 		}
 	}
 	

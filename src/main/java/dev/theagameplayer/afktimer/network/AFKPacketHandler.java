@@ -22,10 +22,10 @@ public final class AFKPacketHandler {
 	public static void registerPackets() {
 		int id = 0;
 		//PLAY DEDICATED SERVER -> CLIENT
-		CHANNEL.messageBuilder(CTimerStartPacket.class, id++).encoder(CTimerStartPacket::encode).decoder(CTimerStartPacket::decode).consumer(CTimerStartPacket.Handler::handle).add();
-		CHANNEL.messageBuilder(CTimerStopPacket.class, id++).encoder(CTimerStopPacket::encode).decoder(CTimerStopPacket::decode).consumer(CTimerStopPacket.Handler::handle).add();
-		CHANNEL.messageBuilder(CTimerQueryPacket.class, id++).encoder(CTimerQueryPacket::encode).decoder(CTimerQueryPacket::decode).consumer(CTimerQueryPacket.Handler::handle).add();
-		CHANNEL.messageBuilder(CTimerExtendPacket.class, id++).encoder(CTimerExtendPacket::encode).decoder(CTimerExtendPacket::decode).consumer(CTimerExtendPacket.Handler::handle).add();
+		CHANNEL.messageBuilder(CTimerStartPacket.class, id++).encoder(CTimerStartPacket::encode).decoder(CTimerStartPacket::decode).consumerMainThread(CTimerStartPacket.Handler::handle).add();
+		CHANNEL.messageBuilder(CTimerStopPacket.class, id++).encoder(CTimerStopPacket::encode).decoder(CTimerStopPacket::decode).consumerMainThread(CTimerStopPacket.Handler::handle).add();
+		CHANNEL.messageBuilder(CTimerQueryPacket.class, id++).encoder(CTimerQueryPacket::encode).decoder(CTimerQueryPacket::decode).consumerMainThread(CTimerQueryPacket.Handler::handle).add();
+		CHANNEL.messageBuilder(CTimerExtendPacket.class, id++).encoder(CTimerExtendPacket::encode).decoder(CTimerExtendPacket::decode).consumerMainThread(CTimerExtendPacket.Handler::handle).add();
 	}
 	
 	public static void sendToClient(Object msgIn, ServerPlayer playerIn) {

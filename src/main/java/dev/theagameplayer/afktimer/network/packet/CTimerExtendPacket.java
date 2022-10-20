@@ -6,8 +6,8 @@ import dev.theagameplayer.afktimer.AFKEventManager.ClientEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent.Context;
@@ -38,7 +38,7 @@ public final class CTimerExtendPacket {
 		private static void handlePacket(CTimerExtendPacket msgIn, Supplier<Context> ctxIn) {
 			ClientEvents.clientTime += msgIn.time;
 			Minecraft mc = Minecraft.getInstance();
-			mc.player.sendMessage(new TranslatableComponent("commands.afktimer.client.extend", msgIn.time).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)), mc.player.getUUID());
+			mc.player.sendSystemMessage(Component.translatable("commands.afktimer.client.extend", msgIn.time).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 		}
 	}
 }
