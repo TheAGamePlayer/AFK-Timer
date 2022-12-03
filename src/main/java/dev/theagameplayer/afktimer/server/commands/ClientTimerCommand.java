@@ -14,14 +14,17 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.TimeArgument;
 
 public final class ClientTimerCommand {
-	public static ArgumentBuilder<CommandSourceStack, ?> register() {
+	public static final ArgumentBuilder<CommandSourceStack, ?> register() {
 		return Commands.literal("client")
 				.requires(player -> {
 					return player.hasPermission(0);
-				}).then(Commands.literal("start").then(Commands.argument("time", TimeArgument.time()).then(Commands.argument("quitGame", BoolArgumentType.bool()) .executes(ctx -> {
+				}).then(Commands.literal("start").then(Commands.argument("time", TimeArgument.time()).then(Commands.argument("quitGame", BoolArgumentType.bool()).executes(ctx -> {
 					AFKPacketHandler.sendToClient(new CTimerStartPacket(IntegerArgumentType.getInteger(ctx, "time"), BoolArgumentType.getBool(ctx, "quitGame")), ctx.getSource().getPlayerOrException());
 					return 0;
-				})))).then(Commands.literal("stop").executes(ctx -> {
+				})).executes(ctx -> {
+					AFKPacketHandler.sendToClient(new CTimerStartPacket(IntegerArgumentType.getInteger(ctx, "time"), false), ctx.getSource().getPlayerOrException());
+					return 0;
+				}))).then(Commands.literal("stop").executes(ctx -> {
 					AFKPacketHandler.sendToClient(new CTimerStopPacket(), ctx.getSource().getPlayerOrException());
 					return 0;
 				})).then(Commands.literal("query").executes(ctx -> {

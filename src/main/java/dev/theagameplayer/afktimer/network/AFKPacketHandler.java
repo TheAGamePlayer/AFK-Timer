@@ -19,7 +19,7 @@ public final class AFKPacketHandler {
 			PROTOCAL_VERSION::equals, 
 			PROTOCAL_VERSION::equals);
 	
-	public static void registerPackets() {
+	public static final void registerPackets() {
 		int id = 0;
 		//PLAY DEDICATED SERVER -> CLIENT
 		CHANNEL.messageBuilder(CTimerStartPacket.class, id++).encoder(CTimerStartPacket::encode).decoder(CTimerStartPacket::decode).consumerMainThread(CTimerStartPacket.Handler::handle).add();
@@ -28,7 +28,7 @@ public final class AFKPacketHandler {
 		CHANNEL.messageBuilder(CTimerExtendPacket.class, id++).encoder(CTimerExtendPacket::encode).decoder(CTimerExtendPacket::decode).consumerMainThread(CTimerExtendPacket.Handler::handle).add();
 	}
 	
-	public static void sendToClient(Object msgIn, ServerPlayer playerIn) {
+	public static final void sendToClient(final Object msgIn, final ServerPlayer playerIn) {
 		CHANNEL.send(PacketDistributor.PLAYER.with(() -> playerIn), msgIn);
 	}
 }

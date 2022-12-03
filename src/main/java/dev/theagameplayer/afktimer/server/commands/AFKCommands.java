@@ -7,8 +7,8 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 
 public final class AFKCommands {
-	public static void build(CommandDispatcher<CommandSourceStack> dispatcherIn, Commands.CommandSelection selectionIn) {
-		LiteralArgumentBuilder<CommandSourceStack> builder = LiteralArgumentBuilder.<CommandSourceStack>literal("afktimer");
+	public static final void build(final CommandDispatcher<CommandSourceStack> dispatcherIn, final Commands.CommandSelection selectionIn) {
+		final LiteralArgumentBuilder<CommandSourceStack> builder = LiteralArgumentBuilder.<CommandSourceStack>literal("afktimer");
 		builder.then(ClientTimerCommand.register());
 		if (selectionIn == Commands.CommandSelection.DEDICATED)
 			builder.then(ServerTimerCommand.register());

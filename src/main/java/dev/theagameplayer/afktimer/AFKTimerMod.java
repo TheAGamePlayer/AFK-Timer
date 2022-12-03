@@ -25,7 +25,7 @@ public final class AFKTimerMod {
 		DistExecutor.unsafeRunForDist(() -> ClientEvents::new, () -> ServerEvents::new);
 	}
 	
-	private void commonSetup(final FMLCommonSetupEvent eventIn) {
+	private final void commonSetup(final FMLCommonSetupEvent eventIn) {
 		AFKPacketHandler.registerPackets();
 		LOGGER.info("Finished common setup.");
 	}

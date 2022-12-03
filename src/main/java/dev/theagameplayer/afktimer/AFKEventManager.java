@@ -32,13 +32,13 @@ public final class AFKEventManager {
 			this.forgeBus.addListener(ClientEvents::clientTick);
 		}
 		
-		public static void loggedOut(ClientPlayerNetworkEvent.LoggingOut eventIn) {
+		public static final void loggedOut(final ClientPlayerNetworkEvent.LoggingOut eventIn) {
 			clientActive = false;
 			clientTime = 0;
 			clientTick = 0;
 		}
 		
-		public static void clientTick(TickEvent.ClientTickEvent eventIn) {
+		public static final void clientTick(final TickEvent.ClientTickEvent eventIn) {
 			if (eventIn.phase == TickEvent.Phase.END && clientActive) {
 				clientTick++;
 				if (clientTick > clientTime) {
@@ -51,8 +51,8 @@ public final class AFKEventManager {
 			}
 		}
 		
-		private static void disconnectClient(Minecraft mcIn) {
-			boolean local = mcIn.isLocalServer();
+		private static final void disconnectClient(final Minecraft mcIn) {
+			final boolean local = mcIn.isLocalServer();
 			mcIn.level.disconnect();
 			if (local) {
 				mcIn.clearLevel(new GenericDirtMessageScreen(Component.translatable("menu.savingLevel")));
@@ -62,7 +62,7 @@ public final class AFKEventManager {
 			if (clientQuitGame) {
 				mcIn.stop();
 			} else {
-				TitleScreen titleScreen = new TitleScreen();
+				final TitleScreen titleScreen = new TitleScreen();
 				if (local) {
 					mcIn.setScreen(titleScreen);
 				} else {
@@ -73,13 +73,13 @@ public final class AFKEventManager {
 	}
 	
 	public static abstract class CommonEvents {
-		protected IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+		protected final IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 		
 		public CommonEvents() {
 			this.forgeBus.addListener(CommonEvents::registerCommands);
 		}
 		
-		public static void registerCommands(RegisterCommandsEvent eventIn) {
+		public static final void registerCommands(final RegisterCommandsEvent eventIn) {
 			AFKCommands.build(eventIn.getDispatcher(), eventIn.getCommandSelection());
 		}
 	}
@@ -96,11 +96,11 @@ public final class AFKEventManager {
 			this.forgeBus.addListener(ServerEvents::serverStarted);
 		}
 		
-		public static void serverStarted(ServerStartedEvent eventIn) {
+		public static final void serverStarted(final ServerStartedEvent eventIn) {
 			server = eventIn.getServer();
 		}
 		
-		public static void serverTick(TickEvent.ServerTickEvent eventIn) {
+		public static final void serverTick(final TickEvent.ServerTickEvent eventIn) {
 			if (server != null && eventIn.phase == TickEvent.Phase.END && serverActive) {
 				serverTick++;
 				if (serverTick > serverTime) {

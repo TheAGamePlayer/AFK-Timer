@@ -12,7 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 
 public final class ServerTimerCommand {
-	public static ArgumentBuilder<CommandSourceStack, ?> register() {
+	public static final ArgumentBuilder<CommandSourceStack, ?> register() {
 		return Commands.literal("server")
 				.requires(player -> {
 					return player.hasPermission(4);
