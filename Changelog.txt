@@ -1,4 +1,7 @@
 #Minecraft 1.19.x
+Version 1.0.7.0R:
+- Update to 1.19.4
+
 Version 1.0.6R:
 - Update to 1.19.3
 
