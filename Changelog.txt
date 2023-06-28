@@ -1,4 +1,9 @@
 #Minecraft 1.19.x
+Version 2.0.0.0R:
+- The mod no longer requires the mod on both the client and server side.
+- Client side commands can now be ran on Servers & Realms without the mod.
+- Slight optimizations.
+
 Version 1.0.7.0R:
 - Update to 1.19.4
 
