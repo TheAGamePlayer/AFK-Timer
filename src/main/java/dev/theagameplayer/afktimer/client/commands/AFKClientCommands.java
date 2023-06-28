@@ -1,17 +1,14 @@
-package dev.theagameplayer.afktimer.server.commands;
+package dev.theagameplayer.afktimer.client.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.Commands;
 
-public final class AFKCommands {
-	public static final void build(final CommandDispatcher<CommandSourceStack> dispatcherIn, final Commands.CommandSelection selectionIn) {
+public final class AFKClientCommands {
+	public static final void build(final CommandDispatcher<CommandSourceStack> dispatcherIn) {
 		final LiteralArgumentBuilder<CommandSourceStack> builder = LiteralArgumentBuilder.<CommandSourceStack>literal("afktimer");
 		builder.then(ClientTimerCommand.register());
-		if (selectionIn == Commands.CommandSelection.DEDICATED)
-			builder.then(ServerTimerCommand.register());
 		dispatcherIn.register(builder);
 	}
 }
