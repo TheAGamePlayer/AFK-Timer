@@ -4,8 +4,8 @@ import org.apache.logging.log4j.Logger;
 
 import dev.theagameplayer.afktimer.AFKTimerMod;
 import net.minecraft.server.MinecraftServer;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.server.ServerStartedEvent;
+import net.neoforged.neoforge.event.TickEvent;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
 
 public final class AFKServerEvents {
 	private static final Logger LOGGER = AFKTimerMod.LOGGER;

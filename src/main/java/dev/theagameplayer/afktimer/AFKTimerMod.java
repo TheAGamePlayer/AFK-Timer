@@ -6,11 +6,10 @@ import org.apache.logging.log4j.Logger;
 import dev.theagameplayer.afktimer.event.AFKBaseEvents;
 import dev.theagameplayer.afktimer.event.AFKClientEvents;
 import dev.theagameplayer.afktimer.event.AFKServerEvents;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.common.NeoForge;
 
 @Mod(value = AFKTimerMod.MODID)
 public final class AFKTimerMod {
@@ -18,13 +17,12 @@ public final class AFKTimerMod {
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 	public static final boolean DEBUG_SERVER = false;
 
-	public AFKTimerMod() {
-		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+	public AFKTimerMod(final IEventBus modEventBusIn) {
 		if (FMLEnvironment.dist.isClient()) {
-			attachClientEventListeners(modEventBus, MinecraftForge.EVENT_BUS);
+			attachClientEventListeners(modEventBusIn, NeoForge.EVENT_BUS);
 			if (!DEBUG_SERVER) return;
 		}
-		attachServerEventListeners(modEventBus, MinecraftForge.EVENT_BUS);
+		attachServerEventListeners(modEventBusIn, NeoForge.EVENT_BUS);
 	}
 
 	public static final void attachClientEventListeners(final IEventBus modBusIn, final IEventBus forgeBusIn) {

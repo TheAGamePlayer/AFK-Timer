@@ -1,6 +1,8 @@
 {
 	"homepage": "https://www.curseforge.com/minecraft/mc-mods/afk-timer",
 	"promos": {
+		"1.20.4-latest": "2.0.2.0R",
+		"1.20.4-recommended": "2.0.2.0R",
 		"1.20.1-latest": "2.0.1.0R",
 		"1.20.1-recommended": "2.0.1.0R",
 		"1.19.4-latest": "2.0.0.0R",
@@ -15,6 +17,9 @@
 		"1.17.1-recommended": "1.0.2R",
 		"1.16.5-latest": "1.0.1R",
 		"1.16.5-recommended": "1.0.1R"
+	},
+	"1.20.4": {
+		"2.0.2.0R": "- Updated to 1.20.4 & Moved to NeoForge!",
 	},
 	"1.20.1": {
 		"2.0.1.0R": "- Updated to 1.20.1\n- Fixed Mods.toml having incorrect website links."

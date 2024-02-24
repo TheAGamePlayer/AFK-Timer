@@ -1,4 +1,8 @@
 #Minecraft 1.20.x
+Version 2.0.2.0R:
+- Updated to 1.20.4
+- Moved to NeoForge.
+
 Version 2.0.1.0R:
 - Updated to 1.20.1
 - Fixed Mods.toml having incorrect website links.

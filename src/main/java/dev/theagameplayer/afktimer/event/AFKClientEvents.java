@@ -10,10 +10,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.GenericDirtMessageScreen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
+import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
-import net.minecraftforge.client.event.RegisterClientCommandsEvent;
-import net.minecraftforge.event.TickEvent;
+import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
+import net.neoforged.neoforge.client.event.RegisterClientCommandsEvent;
+import net.neoforged.neoforge.event.TickEvent;
 
 public final class AFKClientEvents {
 	private static final Logger LOGGER = AFKTimerMod.LOGGER;
@@ -47,12 +48,12 @@ public final class AFKClientEvents {
 
 	private static final void disconnectClient(final Minecraft mcIn) {
 		final boolean local = mcIn.isLocalServer();
-		final boolean realms = mcIn.isConnectedToRealms();
+		final ServerData serverData = mcIn.getCurrentServer();
 		mcIn.level.disconnect();
 		if (local) {
-			mcIn.clearLevel(new GenericDirtMessageScreen(Component.translatable("menu.savingLevel")));
+			mcIn.disconnect(new GenericDirtMessageScreen(Component.translatable("menu.savingLevel")));
 		} else {
-			mcIn.clearLevel();
+			mcIn.disconnect();
 		}
 		if (clientQuitGame) {
 			mcIn.stop();
@@ -60,7 +61,7 @@ public final class AFKClientEvents {
 			final TitleScreen titleScreen = new TitleScreen();
 			if (local) {
 				mcIn.setScreen(titleScreen);
-			} else if (realms) {
+			} else if (serverData != null && serverData.isRealm()) {
 				mcIn.setScreen(new RealmsMainScreen(titleScreen));
 			} else {
 				mcIn.setScreen(new JoinMultiplayerScreen(titleScreen));
