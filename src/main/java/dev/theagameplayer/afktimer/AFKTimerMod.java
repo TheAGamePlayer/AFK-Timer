@@ -17,26 +17,26 @@ public final class AFKTimerMod {
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 	public static final boolean DEBUG_SERVER = false;
 
-	public AFKTimerMod(final IEventBus modEventBusIn) {
+	public AFKTimerMod(final IEventBus pModEventBus) {
 		if (FMLEnvironment.dist.isClient()) {
-			attachClientEventListeners(modEventBusIn, NeoForge.EVENT_BUS);
+			attachClientEventListeners(pModEventBus, NeoForge.EVENT_BUS);
 			if (!DEBUG_SERVER) return;
 		}
-		attachServerEventListeners(modEventBusIn, NeoForge.EVENT_BUS);
+		attachServerEventListeners(pModEventBus, NeoForge.EVENT_BUS);
 	}
 
-	public static final void attachClientEventListeners(final IEventBus modBusIn, final IEventBus forgeBusIn) {
+	public static final void attachClientEventListeners(final IEventBus pModBus, final IEventBus pForgeBus) {
 		//Client
-		forgeBusIn.addListener(AFKClientEvents::loggingOut);
-		forgeBusIn.addListener(AFKClientEvents::registerClientCommands);
-		forgeBusIn.addListener(AFKClientEvents::clientTick);
+		pForgeBus.addListener(AFKClientEvents::loggingOut);
+		pForgeBus.addListener(AFKClientEvents::registerClientCommands);
+		pForgeBus.addListener(AFKClientEvents::clientTickPost);
 	}
 
-	public static final void attachServerEventListeners(final IEventBus modBusIn, final IEventBus forgeBusIn) {
+	public static final void attachServerEventListeners(final IEventBus pModBus, final IEventBus pForgeBus) {
 		//Base
-		forgeBusIn.addListener(AFKBaseEvents::registerCommands);
+		pForgeBus.addListener(AFKBaseEvents::registerCommands);
 		//Server
-		forgeBusIn.addListener(AFKServerEvents::serverTick);
-		forgeBusIn.addListener(AFKServerEvents::serverStarted);
+		pForgeBus.addListener(AFKServerEvents::serverTickPost);
+		pForgeBus.addListener(AFKServerEvents::serverStarted);
 	}
 }

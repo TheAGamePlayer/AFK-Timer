@@ -8,10 +8,10 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 
 public final class AFKServerCommands {
-	public static final void build(final CommandDispatcher<CommandSourceStack> dispatcherIn, final Commands.CommandSelection selectionIn) {
+	public static final void build(final CommandDispatcher<CommandSourceStack> pDispatcher, final Commands.CommandSelection pSelection) {
 		final LiteralArgumentBuilder<CommandSourceStack> builder = LiteralArgumentBuilder.<CommandSourceStack>literal("afktimer");
-		if (selectionIn == Commands.CommandSelection.DEDICATED || AFKTimerMod.DEBUG_SERVER)
+		if (pSelection == Commands.CommandSelection.DEDICATED || AFKTimerMod.DEBUG_SERVER)
 			builder.then(ServerTimerCommand.register());
-		dispatcherIn.register(builder);
+		pDispatcher.register(builder);
 	}
 }
